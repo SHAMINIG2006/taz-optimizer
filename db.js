@@ -1,4 +1,4 @@
-db.js
+
 const { MongoClient } = require("mongodb");
 const url = "mongodb://localhost:27017/taxCalculatorDB"; // Update with your MongoDB URL
 let client;
