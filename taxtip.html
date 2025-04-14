@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="tipApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      background-color: rgb(16, 156, 16);
+      text-align: center;
+    }
+    h4,p {
+      margin: 0;
+      color: white;
+    }
+  </style>
+</head>
+<body ng-controller="tipCtrl">
+  <h4>💡 Tax Tip of the Day:</h4><br>
+  <p>{{ randomTip }}</p>
+
+  <script>
+    var app = angular.module('tipApp', []);
+    app.controller('tipCtrl', function($scope) {
+      const tips = [
+        "Keep all receipts for deductions!",
+        "File early to avoid last-minute stress.",
+        "Double-check bank account details.",
+        "Contribute to retirement accounts for tax benefits.",
+        "Track your charitable donations accurately."
+      ];
+      $scope.randomTip = tips[Math.floor(Math.random() * tips.length)];
+    });
+  </script>
+</body>
+</html>
