@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator 2025-2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header-container">
+        <h1>Income Tax Calculator (2025-2026)</h1>
+    <div class="button-group">
+        <button class="theme-toggle-btn" id="themeToggle">Dark Mode</button>
+        <button class="login-btn">Login / Sign Up</button>
+    </div>    </div>
+    <form id="taxForm">
+        <fieldset class="income">
+            <legend>Income Details</legend>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Income from Salary</label>
+                    <span class="info" title="Total salary before any deductions">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="salary" placeholder="150000" required>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Income from Interest</label>
+                    <span class="info" title="Income from savings bank, deposits, and other interest">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="interest" placeholder="20000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Rental Income Received</label>
+                    <span class="info" title="Rent received from let-out property">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="rentalIncome" placeholder="150000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Income from Digital Assets</label>
+                    <span class="info" title="Earnings from stocks, crypto, etc.">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="digitalAssets" placeholder="50000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Exempt Allowances</label>
+                    <span class="info" title="Tax-exempt allowances like HRA, LTA">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="exemptAllowances" placeholder="30000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Interest on Home Loan</label>
+                    <span class="info" title="Home loan interest paid under tax benefits">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="homeLoanInterest" placeholder="200000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Other Income</label>
+                    <span class="info" title="Any other income like freelancing, side business">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="otherIncome" placeholder="25000">
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset class="deductions">
+            <legend>Deductions</legend>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Basic Deductions (80C)</label>
+                    <span class="info" title="Investments in LIC, PPF, EPF, etc.">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deduction80C" placeholder="150000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Medical Insurance (80D)</label>
+                    <span class="info" title="Health insurance premiums paid">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deduction80D" placeholder="25000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Interest on Housing Loan (80EEA)</label>
+                    <span class="info" title="Additional tax benefit on home loan interest">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deduction80EEA" placeholder="50000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Employer's Contribution to NPS (80CCD(2))</label>
+                    <span class="info" title="Employer contribution to NPS scheme">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deductionNPS" placeholder="50000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Interest from Deposits (80TTA)</label>
+                    <span class="info" title="Tax-free interest from savings account">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deductionTTA" placeholder="10000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Donations to Charity (80G)</label>
+                    <span class="info" title="Tax deductions for charitable donations">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deduction80G" placeholder="5000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Employee's Contribution to NPS (80CCD)</label>
+                    <span class="info" title="Your personal contribution to NPS">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deduction80CCD" placeholder="50000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="label-container">
+                    <label>Any Other Deduction</label>
+                    <span class="info" title="Any additional deductions applicable">&#9432;</span>
+                </div>
+                <div class="input-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="number" id="deductionOther" placeholder="10000">
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+    <div class="buttons">
+        <button type="button" id="calculateTax">Calculate Tax</button>
+        <button type="button" id="showPlans">Show Tax Plans</button>
+    </div>
+
+    <p id="errorMsg"></p>
+    <p id="taxResult"></p>
+
+    <div id="taxPlansContainer" style="display:none; background-color: darkgreen;border: none;">
+    <div class="tax-plans-header">
+      <h3 style="color: white;"><i class="fas fa-lightbulb"></i>Tax Saving Plans</h3>
+      <p><span id="planIncomeDisplay" style="color: white;">₹0</span></p>
+    </div>
+    <div id="taxPlansList"></div>
+    <div class="save-plans" style="color: black;">
+      <button id="savePlansBtn" >Save My Selections</button>
+      <p id="saveStatus"></p>
+    </div>
+  </div>
+    
+    <script src="script.js"></script>
+    <script>
+        function toggleTheme() {
+          document.body.classList.toggle('light-theme');
+        }
+      </script>
+<iframe src="taxtip.html" style="width: 100%; border: none; height: 90px;"></iframe>
+<iframe src="footer.html" style="width: 100%; border: none;"></iframe>
+
+
+</body>
+</html>
