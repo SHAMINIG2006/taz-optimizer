@@ -1,0 +1,28 @@
+db.js
+const { MongoClient } = require("mongodb");
+const url = "mongodb://localhost:27017/taxCalculatorDB"; // Update with your MongoDB URL
+let client;
+let db;
+
+async function connectDB() {
+  try {
+    console.log("Attempting to connect to MongoDB...");
+    client = new MongoClient(url);
+    await client.connect();
+    db = client.db();
+    // Test the connection
+    await db.command({ ping: 1 });
+    console.log("✅ Successfully connected to MongoDB");
+    return db;
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error.message);
+    process.exit(1);
+  }
+}
+
+function getDB() {
+  if (!db) throw new Error("Database not connected. Call connectDB() first.");
+  return db;
+}
+
+module.exports = { connectDB, getDB };
