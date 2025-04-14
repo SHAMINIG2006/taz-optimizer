@@ -1,0 +1,476 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 80px 20px 20px;
+    align-items: center;
+}
+
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header-container h1 {
+    margin: 0;
+    color: rgb(66, 194, 66);
+    font-size: 1.5em;
+}
+
+.login-btn,.theme-toggle-btn {
+    padding: 10px 15px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px; /* optional, gives some breathing space */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* spacing between Dark Mode and Login buttons */
+}
+
+
+.login-btn:hover {
+    background-color: darkgreen;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgb(66, 194, 66);
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+fieldset {
+    width: 48%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #222;
+    border: 3px solid rgb(66, 194, 66);
+}
+
+legend {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: rgb(66, 194, 66);
+    padding: 0 10px;
+}
+
+.input-row {
+    margin-bottom: 15px;
+}
+
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.info {
+    color: #aaa;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.rupee-symbol {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-right: 8px;
+    color: rgb(66, 194, 66);
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    width: 80%;
+}
+
+.buttons {
+    text-align: center;
+    margin: 30px 0;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+#errorMsg {
+    color: #ff0019;
+    font-weight: bold;
+    text-align: center;
+}
+
+#taxResult {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+
+.auth-container {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 8px;
+}
+
+.auth-container h2 {
+    text-align: center;
+    color: #42c242;
+    margin-bottom: 10px;
+}
+
+.form-line {
+    height: 10px;
+}
+
+.input-group {
+    margin: 5px 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.input-group input {
+    width: 97%;
+    padding: 8px;
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: white;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    color: #777;
+    cursor: pointer;
+}
+
+.auth-btn {
+    width: 101%;
+    padding: 8px;
+    background: #42c242;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 10px;
+    color: #42c242;
+}
+
+.auth-links a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+    height: 18px; 
+}
+
+input.error {
+    border-color: #ff6b6b !important;
+    outline: 1px solid #ff6b6b;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #777;
+}
+
+.auth-container {
+    width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#taxPlansContainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .tax-plans-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .tax-plans-header h3 {
+    color: #42c242;
+  }
+  
+  .plan {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #42c242;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .plan h4 {
+    margin-top: 0;
+    color: #42c242;
+  }
+  
+  .plan ul {
+    padding-left: 20px;
+  }
+  
+  .plan-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .plan-checkbox input {
+    margin-right: 8px;
+  }
+  
+  .save-plans {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #savePlansBtn {
+    padding: 10px 20px;
+    background: #42c242;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #savePlansBtn:hover {
+    background: #3aa832;
+  }
+  
+  #saveStatus {
+    color: #42c242;
+    margin-top: 10px;
+  }
+
+  .logout-btn {
+    background-color: #f44336 !important;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d32f2f !important;
+  }
+
+  /* Light Theme Styles */
+  body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-mode .header-container {
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode fieldset {
+    background-color: #ffffff;
+    border-color: #42c242;
+}
+
+body.light-mode .input-container {
+    background-color: #eaeaea;
+}
+
+body.light-mode input {
+    color: #000000;
+    background: none;
+}
+
+body.light-mode .auth-container {
+    background-color: #f5f5f5;
+}
+
+body.light-mode .input-group input {
+    background: #ffffff;
+    border-color: #ccc;
+    color: #000000;
+}
+
+body.light-mode .password-toggle {
+    color: #444;
+}
+
+body.light-mode .plan {
+    background: #fff;
+    color: #000;
+}
+
+body.light-mode #taxPlansContainer {
+    background: #fff;
+    border-color: #ccc;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    fieldset {
+        width: 100%;
+    }
+
+    .auth-container {
+        width: 90%;
+    }
+
+    .header-container h1 {
+        font-size: 1.2em;
+    }
+
+    .login-btn, .theme-toggle-btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 100px 10px 10px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-container h1 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .login-btn, .theme-toggle-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .auth-btn {
+        width: 100%;
+    }
+
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+.link-hover:hover {
+    color: #0d6efd !important;
+    text-decoration: underline;
+  }
+
+  body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
