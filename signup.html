@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Tax Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="login-page">
+    <div class="header-container">
+        <h1>Tax Calculator</h1>
+    </div>
+
+    <div class="auth-container">
+        <div id="emailStep">
+            <h2><i class="fas fa-envelope"></i> Enter Email</h2>
+            <div class="form-line"></div>
+            
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="email" placeholder="your@email.com">
+                <div class="error-message" id="email-error"></div>
+            </div>
+            
+            <div class="form-line"></div>
+            <button class="auth-btn" id="sendOtpBtn">Send OTP</button>
+        </div>
+
+        <div id="otpStep" style="display:none;">
+            <h2><i class="fas fa-lock"></i> Verify OTP</h2>
+            <div class="form-line"></div>
+            
+            <div class="input-group">
+                <label>6-digit OTP</label>
+                <input type="text" id="otp" placeholder="123456" maxlength="6">
+                <div class="error-message" id="otp-error"></div>
+            </div>
+            
+            <div class="form-line"></div>
+            <button class="auth-btn" id="verifyOtpBtn">Verify OTP</button>
+        </div>
+
+        <div id="passwordStep" style="display:none;">
+            <h2><i class="fas fa-key"></i> Set Password</h2>
+            <div class="form-line"></div>
+            
+            <div class="input-group">
+                <label>New Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Create password">
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            
+            <div class="form-line"></div>
+            
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmPassword" placeholder="Repeat password">
+                    <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                </div>
+                <div class="error-message" id="confirm-error"></div>
+            </div>
+            
+            <div class="form-line"></div>
+            <button class="auth-btn" id="completeBtn">Complete Sign Up</button>
+        </div>
+
+        <div class="auth-links">
+            <a href="login.html">Already have an account? Login</a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Password requirements regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/;
+            
+            // Toggle password visibility
+            $('#togglePassword, #toggleConfirmPassword').click(function() {
+                const input = $(this).siblings('input');
+                const type = input.attr('type') === 'password' ? 'text' : 'password';
+                input.attr('type', type);
+                $(this).toggleClass('fa-eye fa-eye-slash');
+            });
+    
+            // Clear errors when typing
+            $('input').on('input', function() {
+                const field = $(this).attr('id');
+                $(`#${field}-error`).hide();
+                $(this).removeClass('error');
+            });
+    
+            // Step 1: Send OTP
+            $('#sendOtpBtn').click(function() {
+                const email = $('#email').val().trim();
+                
+                // Validate email using regex
+                if (!email) {
+                    showError('email', 'Email is required');
+                    return;
+                }
+                if (!emailRegex.test(email)) {
+                    showError('email', 'Please enter a valid email');
+                    return;
+                }
+    
+                $(this).html('<i class="fas fa-spinner fa-spin"></i> Sending...').prop('disabled', true);
+                
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/api/signup/request', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                xhr.onload = function() {
+                    $('#sendOtpBtn').html('Send OTP').prop('disabled', false);
+                    
+                    try {
+                        const result = JSON.parse(xhr.responseText);
+                        if (xhr.status === 200 && result.success) {
+                            $('#emailStep').hide();
+                            $('#otpStep').show();
+                            $('#otp').focus();
+                        } else {
+                            showError('email', result.error || 'Failed to send OTP');
+                        }
+                    } catch (e) {
+                        showError('email', 'Invalid server response');
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    $('#sendOtpBtn').html('Send OTP').prop('disabled', false);
+                    showError('email', 'Network error - please try again');
+                };
+                
+                xhr.send(JSON.stringify({ email }));
+            });
+    
+            // Step 2: Verify OTP
+            $('#verifyOtpBtn').click(function() {
+                const email = $('#email').val().trim();
+                const otp = $('#otp').val().trim();
+                
+                if (!otp || otp.length !== 6) {
+                    showError('otp', 'Please enter 6-digit OTP');
+                    return;
+                }
+    
+                $(this).html('<i class="fas fa-spinner fa-spin"></i> Verifying...').prop('disabled', true);
+                
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/api/signup/verify', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                xhr.onload = function() {
+                    $('#verifyOtpBtn').html('Verify OTP').prop('disabled', false);
+                    
+                    try {
+                        const result = JSON.parse(xhr.responseText);
+                        if (xhr.status === 200 && result.success) {
+                            $('#otpStep').hide();
+                            $('#passwordStep').show();
+                            $('#password').focus();
+                        } else {
+                            showError('otp', result.error || 'Invalid OTP');
+                        }
+                    } catch (e) {
+                        showError('otp', 'Invalid server response');
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    $('#verifyOtpBtn').html('Verify OTP').prop('disabled', false);
+                    showError('otp', 'Network error');
+                };
+                
+                xhr.send(JSON.stringify({ email, otp }));
+            });
+    
+            // Step 3: Set Password
+            $('#completeBtn').click(function() {
+                const email = $('#email').val().trim();
+                const password = $('#password').val().trim();
+                const confirmPassword = $('#confirmPassword').val().trim();
+                const otp = $('#otp').val().trim();
+    
+                // Validate password using regex
+                if (!password) {
+                    showError('password', 'Password is required');
+                    return;
+                }
+                if (!pwdRegex.test(password)) {
+                    showError('password', 'Password must be 8-15 chars with at least 1 letter, 1 number, and 1 special character');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    showError('confirm', 'Passwords do not match');
+                    return;
+                }
+    
+                $(this).html('<i class="fas fa-spinner fa-spin"></i> Creating account...').prop('disabled', true);
+                
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/api/signup/verify', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                xhr.onload = function() {
+                    $('#completeBtn').html('Complete Sign Up').prop('disabled', false);
+                    
+                    try {
+                        const result = JSON.parse(xhr.responseText);
+                        if (xhr.status === 200 && result.success) {
+                            alert('Account created successfully!');
+                            window.location.href = 'login.html';
+                        } else {
+                            alert(result.error || 'Account creation failed');
+                        }
+                    } catch (e) {
+                        alert('Invalid server response');
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    $('#completeBtn').html('Complete Sign Up').prop('disabled', false);
+                    alert('Network error');
+                };
+                
+                xhr.send(JSON.stringify({ 
+                    email, 
+                    password,
+                    otp 
+                }));
+            });
+    
+            function showError(field, message) {
+                $(`#${field}-error`).html(`<i class="fas fa-exclamation-circle"></i> ${message}`).show();
+                $(`#${field}`).addClass('error');
+            }
+        });
+        </script>
+</body>
+</html>
