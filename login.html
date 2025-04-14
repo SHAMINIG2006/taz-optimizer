@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Tax Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="login-page">
+    <div class="header-container">
+        <h1>Tax Calculator</h1>
+    </div>
+
+    <div class="auth-container">
+        <h2>Login</h2>
+        <div class="form-line"></div>
+        
+        <div class="input-group">
+            <label>Email</label>
+            <input type="text" id="email" placeholder="Enter email" autocomplete="email">
+            <div class="error-message" id="email-error"></div>
+        </div>
+        
+        <div class="form-line"></div>
+        
+        <div class="input-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            <div class="error-message" id="password-error"></div>
+        </div>
+        
+        <div class="form-line"></div>
+        
+        <button class="auth-btn" id="loginBtn">Login</button>
+        
+        <div class="auth-links">
+            <a href="./signup.html">Create account</a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Password toggle
+            $('#togglePassword').click(function() {
+                const password = $('#password');
+                const type = password.attr('type') === 'password' ? 'text' : 'password';
+                password.attr('type', type);
+                $(this).toggleClass('fa-eye fa-eye-slash');
+            });
+            
+            // Login function
+            $('#loginBtn').click(async function(e) {
+              e.preventDefault();
+                const email = $('#email').val().trim();
+                const password = $('#password').val().trim();
+
+                // Clear previous errors
+                // $('#email-error, #password-error').hide();
+
+                // Basic validation
+                if (!email) {
+                    $('#email-error').text('Email is required').show();
+                    return;
+                }
+
+                if (!password) {
+                    $('#password-error').text('Password is required').show();
+                    return;
+                }
+
+                $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Logging in...');
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/login', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Login failed');
+                    }
+
+                    if (result.success) {
+                        localStorage.setItem('isLoggedIn', 'true');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert(result.error || 'Login failed');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    alert('Error: ' + error.message);
+                } finally {
+                    $(this).prop('disabled', false).html('Login');
+                }
+            });
+        });
+
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (loginBtn.textContent === 'Logout') {
+                fetch('http://localhost:3000/api/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                })
+                .then(() => {
+                    localStorage.removeItem('isLoggedIn');
+                    window.location.reload();
+                });
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
