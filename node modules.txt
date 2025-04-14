@@ -1,0 +1,24 @@
+_MACOSX     //folder
+tax-optimizer     //folder
+  backend       //sub folder of tax-optimizer
+    node modules
+    package.json
+    package-lock.json
+    .env
+    db.js
+    server.js
+  frontend     //sub folder of tax-optimizer
+    login.html
+    signup.html
+    footer.html
+    script.html
+    index.html
+    style.css
+    taxtip.html
+  node modules    //sub folder of tax-optimizer
+  logo.png       //sub folder of tax-optimizer
+  node-v22.14.0-x64.msi     //sub folder of tax-optimizer
+  package.json      //sub folder of tax-optimizer
+  package-lock.json     //sub folder of tax-optimizer
+
+  
